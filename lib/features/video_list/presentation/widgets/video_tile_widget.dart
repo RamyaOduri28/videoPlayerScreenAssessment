@@ -42,6 +42,7 @@ class VideoTileWidget extends StatelessWidget {
             // fit: BoxFit.cover,
             width: 50,
             height: 50,
+            color: Colors.teal,
           ),
           const SizedBox(width: 10),
           Expanded(

@@ -25,47 +25,42 @@ class VideoPlayerControls extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      bottom: 0,
-      left: 0,
-      right: 0,
-      child: Container(
-        padding: EdgeInsets.only(bottom: isFullscreen ? 20 : 0),
-        height: isFullscreen ? 80.0 : 60.0,
-        color: Colors.black45,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            IconButton(
-              icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow, color: Colors.white),
-              onPressed: isPlaying ? onPause : onPlay,
-            ),
-            IconButton(
-              icon: const Icon(Icons.replay_10, color: Colors.white),
-              onPressed: onSeekBackward,
-            ),
-            IconButton(
-              icon: const Icon(Icons.forward_10, color: Colors.white),
-              onPressed: onSeekForward,
-            ),
-            Expanded(
-              child: VideoProgressIndicator(
-                controller,
-                allowScrubbing: true,
-                colors: const VideoProgressColors(
-                  playedColor: Colors.blueAccent,
-                  bufferedColor: Colors.grey,
-                  backgroundColor: Colors.black,
-                ),
+    return Container(
+      padding: EdgeInsets.only(bottom: isFullscreen ? 20 : 0),
+      height: isFullscreen ? 80.0 : 60.0,
+      color: Colors.black45,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          IconButton(
+            icon: Icon(isPlaying ? Icons.pause : Icons.play_arrow, color: Colors.white),
+            onPressed: isPlaying ? onPause : onPlay,
+          ),
+          IconButton(
+            icon: const Icon(Icons.replay_10, color: Colors.white),
+            onPressed: onSeekBackward,
+          ),
+          IconButton(
+            icon: const Icon(Icons.forward_10, color: Colors.white),
+            onPressed: onSeekForward,
+          ),
+          Expanded(
+            child: VideoProgressIndicator(
+              controller,
+              allowScrubbing: true,
+              colors: const VideoProgressColors(
+                playedColor: Colors.blueAccent,
+                bufferedColor: Colors.grey,
+                backgroundColor: Colors.black,
               ),
             ),
-            IconButton(
-              icon: Icon(isFullscreen ? Icons.fullscreen_exit : Icons.fullscreen, color: Colors.white),
-              onPressed: onFullscreenToggle,
-            ),
-          ],
-        ),
+          ),
+          IconButton(
+            icon: Icon(isFullscreen ? Icons.fullscreen_exit : Icons.fullscreen, color: Colors.white),
+            onPressed: onFullscreenToggle,
+          ),
+        ],
       ),
     );
+    }
   }
-}

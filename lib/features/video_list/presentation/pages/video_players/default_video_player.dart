@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -109,27 +110,33 @@ class _DefaultVideoPlayerState extends State<DefaultVideoPlayer> {
                   aspectRatio: 16 / 9,
                   child: VideoPlayer(controller!),
                 ),
-          VideoPlayerControls(
-            isPlaying: isPlaying,
-            isFullscreen: isFullscreen,
-            controller: controller!,
-            onFullscreenToggle: () {
-              context
-                  .read<VideoPlayerBloc>()
-                  .add(ToggleFullscreenClickedEvent());
-            },
-            onPlay: () {
-              context.read<VideoPlayerBloc>().add(PlayVideoClickedEvent());
-            },
-            onPause: () {
-              context.read<VideoPlayerBloc>().add(PauseVideoClickedEvent());
-            },
-            onSeekForward: () {
-              context.read<VideoPlayerBloc>().add(SeekForwardClickedEvent());
-            },
-            onSeekBackward: () {
-              context.read<VideoPlayerBloc>().add(SeekBackwardClickedEvent());
-            },
+
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: VideoPlayerControls(
+              isPlaying: isPlaying,
+              isFullscreen: isFullscreen,
+              controller: controller!,
+              onFullscreenToggle: () {
+                context
+                    .read<VideoPlayerBloc>()
+                    .add(ToggleFullscreenClickedEvent());
+              },
+              onPlay: () {
+                context.read<VideoPlayerBloc>().add(PlayVideoClickedEvent());
+              },
+              onPause: () {
+                context.read<VideoPlayerBloc>().add(PauseVideoClickedEvent());
+              },
+              onSeekForward: () {
+                context.read<VideoPlayerBloc>().add(SeekForwardClickedEvent());
+              },
+              onSeekBackward: () {
+                context.read<VideoPlayerBloc>().add(SeekBackwardClickedEvent());
+              },
+            ),
           ),
           if (state is VideoPlayerCompleted)
             VideoCompletionSurvey(
