@@ -7,6 +7,8 @@ PODS:
   - flutter_inappwebview_ios/Core (0.0.1):
     - Flutter
     - OrderedSet (~> 5.0)
+  - integration_test (0.0.1):
+    - Flutter
   - OrderedSet (5.0.0)
   - video_player_avfoundation (0.0.1):
     - Flutter
@@ -15,6 +17,7 @@ PODS:
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - flutter_inappwebview_ios (from `.symlinks/plugins/flutter_inappwebview_ios/ios`)
+  - integration_test (from `.symlinks/plugins/integration_test/ios`)
   - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/darwin`)
 
 SPEC REPOS:
@@ -26,12 +29,15 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_inappwebview_ios:
     :path: ".symlinks/plugins/flutter_inappwebview_ios/ios"
+  integration_test:
+    :path: ".symlinks/plugins/integration_test/ios"
   video_player_avfoundation:
     :path: ".symlinks/plugins/video_player_avfoundation/darwin"
 
 SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_inappwebview_ios: 97215cf7d4677db55df76782dbd2930c5e1c1ea0
+  integration_test: 13825b8a9334a850581300559b8839134b124670
   OrderedSet: aaeb196f7fef5a9edf55d89760da9176ad40b93c
   video_player_avfoundation: 7c6c11d8470e1675df7397027218274b6d2360b3
 

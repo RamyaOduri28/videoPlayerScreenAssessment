@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_video_player_screen/features/video_list/domain/entities/video_list.dart';
 import 'package:flutter_video_player_screen/features/video_list/presentation/bloc/video_list_bloc/videolist_bloc.dart';
 import 'package:flutter_video_player_screen/features/video_list/presentation/pages/video_list_screen/video_list_screen.dart';
-import 'package:flutter_video_player_screen/features/video_list/presentation/pages/video_player_screen/video_player.dart';
 import 'package:flutter_video_player_screen/features/video_list/presentation/widgets/video_tile_widget.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -71,21 +70,4 @@ void main() {
     expect(find.byType(VideoTileWidget), findsNWidgets(2));
   });
   //
-  // testWidgets('VideoListingScreen navigates to VideoPlayerScreen when video tile is tapped', (WidgetTester tester) async {
-  //   final mockVideos = [
-  //     const LibraryVideoEntity(chapterId: '', chapterName: '', duration: 1, isDrm: true, isLiked: true, jwMediaId: '', name: '', source: '', spentTime: 1, subjectId: '', url: '', videoCount: 1, videoSource: '', assets: AssetsModel()),
-  //   ];
-  //   // Simulate the bloc emitting the VideosSuccessState
-  //   when(() => videolistBloc.state).thenReturn(VideosSuccessState(videos: mockVideos));
-  //
-  //   await tester.pumpWidget(
-  //       createWidgetUnderTest()
-  //   );
-  //   await tester.pump();
-  //
-  //   await tester.tap(find.byType(VideoTileWidget));
-  //   await tester.pumpAndSettle();
-  //
-  //   expect(find.byType(VideoPlayerScreen), findsOneWidget);
-  // });
 }

@@ -19,12 +19,16 @@ class VideolistBloc extends Bloc<VideolistEvent, VideolistState> {
 
   FutureOr<void> videoInitialEvent(VideoInitialEvent event, Emitter<VideolistState> emit) async {
     emit(RemoteVideosLoading());
-    final dataState =
-        await _getVideoUseCase.call();
-    if (dataState is DataSuccess) {
-      emit(VideosSuccessState(videos: dataState.data!));
-    } else if (dataState is DataFailed) {
-      emit(VideosError(error: dataState.error!));
+    try {
+      final dataState =
+      await _getVideoUseCase.call();
+      if (dataState is DataSuccess) {
+        emit(VideosSuccessState(videos: dataState.data!));
+      } else if (dataState is DataFailed) {
+        emit(VideosError(error: dataState.error!));
+      }
+    } catch(e) {
+      print('fnskn');
     }
   }
 

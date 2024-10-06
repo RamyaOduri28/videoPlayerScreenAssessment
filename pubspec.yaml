@@ -48,8 +48,11 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  integration_test:
+    sdk: flutter
   mockito:
   build_runner:
+  gherkin:
   bloc_test:
   bdd_widget_test:
 

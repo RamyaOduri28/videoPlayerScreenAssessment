@@ -29,6 +29,8 @@ class _DefaultVideoPlayerState extends State<DefaultVideoPlayer> {
   @override
   void initState() {
     super.initState();
+    isFullscreen = false;
+    _setOrientation(isFullscreen);
     controller = VideoPlayerController.networkUrl(Uri.parse(widget.videoUrl))
       ..initialize().then((_) {
         context.read<VideoPlayerBloc>().add(PlayVideoClickedEvent());
@@ -37,9 +39,11 @@ class _DefaultVideoPlayerState extends State<DefaultVideoPlayer> {
 
   @override
   void dispose() {
+    if (isFullscreen) {
+      context.read<VideoPlayerBloc>().add(ToggleFullscreenClickedEvent());
+      _setOrientation(false); // Ensure we reset to portrait on dispose
+    }
     controller?.dispose();
-    isFullscreen = false;
-    isPlaying = false;
     super.dispose();
   }
 
@@ -100,17 +104,19 @@ class _DefaultVideoPlayerState extends State<DefaultVideoPlayer> {
       child: Stack(
         fit: StackFit.loose,
         children: [
-          isFullscreen
-              ? SizedBox(
-                  width: controller?.value.size.width,
-                  height: controller?.value.size.height,
-                  child: VideoPlayer(controller!),
-                )
-              : AspectRatio(
-                  aspectRatio: 16 / 9,
-                  child: VideoPlayer(controller!),
-                ),
-
+          if (controller != null && controller!.value.isInitialized)
+            isFullscreen
+                ? Positioned.fill(
+              child: VideoPlayer(controller!),
+            )
+                : AspectRatio(
+              aspectRatio: 16 / 9,
+              child: VideoPlayer(controller!),
+            )
+          else
+            const Center(
+              child: CircularProgressIndicator(), // Show loading indicator while video is initializing
+            ),
           Positioned(
             bottom: 0,
             left: 0,
@@ -141,7 +147,6 @@ class _DefaultVideoPlayerState extends State<DefaultVideoPlayer> {
           if (state is VideoPlayerCompleted)
             VideoCompletionSurvey(
               onSurveyComplete: () {
-                print("caled");
                 context.read<VideoPlayerBloc>().add(PlayVideoClickedEvent());
               },
             ),
@@ -166,3 +171,4 @@ void _setOrientation(bool isFullscreen) {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   }
 }
+

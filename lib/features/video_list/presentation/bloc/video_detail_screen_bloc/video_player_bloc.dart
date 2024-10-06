@@ -15,6 +15,7 @@ class VideoPlayerBloc extends Bloc<VideoPlayerEvent, VideoPlayerState> {
     on<VideoCompleteEvent>(videoCompleteEvent);
     on<VideoPlayerErrorEvent>(videoPlayerErrorEvent);
     on<ToggleFullscreenClickedEvent>(toggleFullscreenClickedEvent);
+    on<ResetVideoStateEvent>(resetVideoStateEvent);
   }
 
   FutureOr<void> initializeVideoEvent(InitializeVideoEvent event, Emitter<VideoPlayerState> emit) {
@@ -47,5 +48,9 @@ class VideoPlayerBloc extends Bloc<VideoPlayerEvent, VideoPlayerState> {
 
   FutureOr<void> toggleFullscreenClickedEvent(ToggleFullscreenClickedEvent event, Emitter<VideoPlayerState> emit) {
     emit(ToggleFullScreenState());
+  }
+
+  FutureOr<void> resetVideoStateEvent(ResetVideoStateEvent event, Emitter<VideoPlayerState> emit) {
+    emit(VideoPlayerInitial());
   }
 }

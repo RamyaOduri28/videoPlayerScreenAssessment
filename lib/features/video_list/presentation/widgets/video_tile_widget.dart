@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/svg.dart';
 
 class VideoTileWidget extends StatelessWidget {
   const VideoTileWidget({
@@ -9,13 +8,14 @@ class VideoTileWidget extends StatelessWidget {
     required this.videoName,
     required this.progressValue,
     required this.press,
-    this.imageUrl,
+    this.imageUrl, this.index,
   });
 
   final String? videoName;
   final double progressValue;
   final VoidCallback press;
   final String? imageUrl;
+  final int? index;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +52,7 @@ class VideoTileWidget extends StatelessWidget {
               children: [
                 Text(
                   videoName ?? '',
-                  key: const ValueKey('videoNameKey'),
+                  key: const ValueKey('keyVideoName'),
                   style: const TextStyle(color: Colors.black),
                 ),
                 const SizedBox(height: 20),
@@ -82,7 +82,7 @@ class VideoTileWidget extends StatelessWidget {
                   padding: const EdgeInsets.all(16),
                   child: progressValue >= 1
                       ? const Icon(Icons.replay, key: ValueKey('replayIconKey'),)
-                      : const Icon(Icons.play_circle_fill, key: ValueKey('playIconKey'),),
+                      : Icon(Icons.play_circle_fill, key: ValueKey('playIconKey_$index'),),
                 ),
               ),
             ),

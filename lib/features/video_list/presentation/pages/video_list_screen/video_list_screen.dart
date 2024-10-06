@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_video_player_screen/features/video_list/presentation/widgets/video_tile_widget.dart';
 
+import '../../bloc/video_detail_screen_bloc/video_player_bloc.dart';
 import '../../bloc/video_list_bloc/videolist_bloc.dart';
 import '../video_player_screen/video_player.dart';
 
@@ -24,13 +25,13 @@ class _VideoListingScreenState extends State<VideoListingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Video Listing Screen"),
+          title: const Text("Video Listing Screen", key: Key('VideoListingScreen'),),
           backgroundColor: Colors.blue,
         ),
         body: BlocBuilder<VideolistBloc, VideolistState>(
           builder: (_, state) {
             if (state is RemoteVideosLoading) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator(),  key: Key("ListPageLoadingIndicator"),);
             }
             if (state is VideosError) {
               return const Center(child: Icon(Icons.refresh));
@@ -49,8 +50,10 @@ class _VideoListingScreenState extends State<VideoListingScreen> {
                   final duration = video?.duration ?? 0;
                   final progressValue = spentTime / duration;
                   return VideoTileWidget(
+                    key: Key('video_list_item_$index'),
                     videoName: video?.name ?? '',
                     progressValue: progressValue,
+                    index: index,
                     imageUrl: imageUrl,
                     press: () {
                       Navigator.push(
@@ -58,9 +61,11 @@ class _VideoListingScreenState extends State<VideoListingScreen> {
                           MaterialPageRoute(
                               builder: (context) => VideoPlayerScreen(
                                     videoUrl: video?.url ?? '',
-                                    videoName: video?.name ?? '',
+                                    videoName: video?.name ?? 'S3',
                                     videoType: video?.videoSource ?? '',
-                                  )));
+                                  ))).then((value){
+                        context.read<VideoPlayerBloc>().add(ResetVideoStateEvent());
+                      });
                     },
                   );
                 },

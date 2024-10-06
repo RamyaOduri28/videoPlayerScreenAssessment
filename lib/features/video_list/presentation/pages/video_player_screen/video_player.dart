@@ -22,12 +22,12 @@ class VideoPlayerScreen extends StatelessWidget {
   }
 
   Widget _buildVideoPlayer() {
-    if (videoType == 's3') {
+    if (videoType == 's3' || videoType == 'test_prep_non_drm') {
       return DefaultVideoPlayer(videoUrl: videoUrl, videoName: videoName,);
     } else if (videoType == 'youtube') {
-      return YoutubePlayerScreen(videoUrl: videoUrl, videoName: videoName,);
+      return YoutubePlayerView(videoUrl: videoUrl, videoName: videoName,);
     } else {
-      return const Text('Unsupported video type');
+      return DefaultVideoPlayer(videoUrl: videoUrl, videoName: videoName,);
     }
   }
 }

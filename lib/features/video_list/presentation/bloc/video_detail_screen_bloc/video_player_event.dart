@@ -18,4 +18,5 @@ class VideoCompleteEvent extends VideoPlayerEvent {}
 class VideoPlayerErrorEvent extends VideoPlayerEvent{}
 
 class ToggleFullscreenClickedEvent extends VideoPlayerEvent {}
+class ResetVideoStateEvent extends VideoPlayerEvent {}
 

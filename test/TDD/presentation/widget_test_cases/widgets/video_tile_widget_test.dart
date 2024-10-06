@@ -53,11 +53,12 @@ void main() {
           videoName: 'Test Video',
           progressValue: 0.5,
           press: () {},
+          index: 0,
         ),
       ),
     );
 
-    expect(find.byKey(const ValueKey('playIconKey')), findsOneWidget);
+    expect(find.byKey(Key('playIconKey_0')), findsOneWidget);
     expect(find.byKey(const ValueKey('replayIconKey')), findsNothing);
   });
 
